@@ -9,17 +9,14 @@ app.use(express.json());
 
 const BASE_URL = "http://20.207.122.201/evaluation-service";
 
-// import your logging
 const sendLog = require("../logging_middleware/logger");
 
-// priority weights (custom names)
 const priorityMap = {
   Placement: 3,
   Event: 2,
   Result: 1
 };
 
-// sorting function (customized)
 function prioritizeNotifications(data, limit = 10) {
   return data
     .sort((a, b) => {
@@ -33,7 +30,6 @@ function prioritizeNotifications(data, limit = 10) {
     .slice(0, limit);
 }
 
-// API route
 app.get("/api/notifications", async (req, res) => {
   try {
     const response = await axios.get(`${BASE_URL}/notifications`, {
@@ -74,7 +70,7 @@ app.get("/api/notifications", async (req, res) => {
   }
 });
 
-// start server
 app.listen(5000, () => {
   console.log("Server running at http://localhost:5000");
 });
+
